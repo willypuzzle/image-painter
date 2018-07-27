@@ -2,7 +2,7 @@
     <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: start;">
         <toolbar @cursor-options="cursorOptionsSet()"></toolbar>
         <div ref="parent" style="width: 100%; height: calc(100% - 35px);display: flex;justify-content: center;align-items: start;">
-            <canvas ref="canvas"></canvas>
+            <canvas ref="canvas" v-on:mousemove="mouseMove" v-on:mouseover="mouseOver" v-on:mouseup="mouseUp" v-on:mousedown="mouseDown"></canvas>
         </div>
     </div>
 </template>
@@ -30,6 +30,8 @@
                 cursorOptions: {
                     color: null,
                 },
+                context: {} as CanvasRenderingContext2D|null,
+                clicks: [] as Array<{x: number, y: number, drag: boolean}>,
             };
         },
         methods: {
@@ -86,8 +88,26 @@
                     canvas.height = calculateLenghts.canvas.height;
                     ctx!.drawImage(img, 0, 0, calculateLenghts.img.width, calculateLenghts.img.height,
                                         0, 0, calculateLenghts.canvas.width, calculateLenghts.canvas.height);
+                    ctx!.save();
+                    this.context = ctx;
                 };
                 img.src = dataUrlImage;
+            },
+            mouseOver(evt: Event) {
+                // console.log('over', evt);
+            },
+            mouseUp(evt: Event) {
+                // console.log('up', evt);
+            },
+            mouseDown(evt: Event) {
+                // console.log('down', evt);
+            },
+            mouseMove(evt: MouseEvent) {
+                // console.log('move', evt);
+                const canvas = this.$refs.canvas as HTMLCanvasElement;
+                const x = evt.pageX - canvas.offsetLeft;
+                const y = evt.pageY - canvas.offsetTop;
+                // console.log(x,y)
             },
         },
         watch: {
