@@ -1,29 +1,28 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+    <div style="width: 100%; height: 100%;">
+        <unloaded-image v-if="!imageDataUrl"></unloaded-image>
+        <loaded-image v-else :image-data-url="imageDataUrl"></loaded-image>
+    </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import Vue from 'vue';
+import LoadedImage from './components/LoadedImage.vue';
+import UnloadedImage from './components/UnloadedImage.vue';
 
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
-export default class App extends Vue {}
+export default Vue.extend({
+    components: {
+        LoadedImage,
+        UnloadedImage,
+    },
+    props: {
+        imageDataUrl: {
+            type: String,
+        },
+    },
+});
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
