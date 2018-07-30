@@ -1,7 +1,8 @@
 <template>
     <div style="width: 100%; height: 100%;">
-        <app :image-data-url="imageDataUrl"></app>
+        <app :image-data-url="imageDataUrl" @new-image="logNewImage"></app>
         <input ref="input" type="file" @change="file()"><br>
+        <button @click="download">Download Image</button>
     </div>
 </template>
 
@@ -16,6 +17,7 @@
         data() {
             return {
                 imageDataUrl: null,
+                newImage: '',
             };
         },
         methods: {
@@ -30,6 +32,22 @@
                 if (file) {
                     reader.readAsDataURL(file);
                 }
+            },
+            logNewImage(data: any) {
+                this.newImage = data.image;
+            },
+            download() {
+                if (this.newImage) {
+                    this.downloadURI(this.newImage, 'new-image.png');
+                }
+            },
+            downloadURI(uri: string, name: string) {
+                const link = document.createElement('a');
+                link.download = name;
+                link.href = uri;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             },
         },
     });

@@ -8,6 +8,10 @@
         background-color: gray;
         cursor: pointer;
     }
+
+    .enabled {
+        background-color: gray;
+    }
 </style>
 
 <template>
@@ -20,6 +24,8 @@
                 :y="yCursorColorPicker"
                 @close="enableCursorColorColorPicker = false"
         ></color-picker>
+        <a href="#"><img style="height: 36px;" src="../../../src/assets/restore.png" @click.prevent="$emit('restore')"></a>
+        <a :class="{enabled: this.cursorEnabled}" href="#"><img style="height: 36px;" src="../../../src/assets/pen.png" @click.prevent="toggleCursor"></a>
     </div>
 </template>
 
@@ -37,6 +43,7 @@
                 enableCursorColorColorPicker: false,
                 xCursorColorPicker: 0,
                 yCursorColorPicker: 0,
+                cursorEnabled: false,
             };
         },
         methods: {
@@ -45,6 +52,12 @@
                 this.xCursorColorPicker = rect.left;
                 this.yCursorColorPicker = rect.top;
                 this.enableCursorColorColorPicker = true;
+            },
+            toggleCursor() {
+                this.cursorEnabled = !this.cursorEnabled;
+                this.$emit('cursor-options', {
+                    enabled: this.cursorEnabled,
+                });
             },
         },
         watch: {
