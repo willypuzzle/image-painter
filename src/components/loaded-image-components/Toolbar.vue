@@ -1,32 +1,40 @@
 <style scoped lang="scss">
-    a {
+    .body-button {
+        display: inline-block;
         margin: 5px;
-    }
+        width: 36px;
+        height: 36px;
 
-    .button {
-        color: grey;
+        .button {
+            color: grey;
 
-        &.delete {
-            &:hover {
-                color: red;
+            &.delete {
+                &:hover {
+                    color: red;
+                }
             }
         }
-    }
 
-    .enabled {
-        color: black;
+        .enabled {
+            color: black;
+        }
+
+        .icon {
+            width: 36px;
+            height: 36px;
+        }
     }
 </style>
 
 <template>
-    <div style="display: flex; flex-direction: row; justify-content: start;height: 50px;">
-        <a href="#">
-            <img v-if="theme === 'default'" style="height: 36px;" src="../../../src/assets/pen.png" @click.prevent="toggleCursor">
-            <i v-else-if="theme === 'smilechat'" :class="{ button: true, enabled: this.cursorEnabled, ['idsign-livechat-icon-modifica']: true }"></i>
+    <div ref="parent" style="display: flex; flex-direction: row; justify-content: start;height: 50px;">
+        <a class="body-button" href="#" @click.prevent="toggleCursor">
+            <img v-if="theme === 'default'" style="height: 36px;" src="../../../src/assets/pen.png">
+            <i v-else-if="theme === 'smilechat'" :class="{ button: true, enabled: this.cursorEnabled, ['idsign-livechat-icon-modifica']: true, icon: true }"></i>
         </a>
-        <a href="#" @click.prevent="chooseColor">
+        <a class="body-button" href="#" @click.prevent="chooseColor">
             <img v-if="theme === 'default'" src="../../../src/assets/colors.png">
-            <i v-else-if="theme === 'smilechat'" class="idsign-livechat-icon-colore" :style="{['color'] : cursorColor }"></i>
+            <i v-else-if="theme === 'smilechat'" class="idsign-livechat-icon-colore icon" :style="{['color'] : cursorColor }"></i>
         </a>
         <color-picker
                 v-if="enableCursorColorColorPicker"
@@ -35,9 +43,9 @@
                 :y="yCursorColorPicker"
                 @close="enableCursorColorColorPicker = false"
         ></color-picker>
-        <a href="#">
-            <img v-if="theme === 'default'" style="height: 36px;" src="../../../src/assets/restore.png" @click.prevent="$emit('restore')">
-            <i class="button delete idsign-livechat-icon-cancella" v-else-if="theme === 'smilechat'"></i>
+        <a class="body-button" href="#" @click.prevent="$emit('restore')">
+            <img v-if="theme === 'default'" style="height: 36px;" src="../../../src/assets/restore.png">
+            <i class="button delete idsign-livechat-icon-cancella icon" v-else-if="theme === 'smilechat'"></i>
         </a>
     </div>
 </template>
@@ -66,10 +74,10 @@
             };
         },
         methods: {
-            chooseColor(evt: Event) {
-                const rect = evt.srcElement!.getBoundingClientRect();
-                this.xCursorColorPicker = rect.left;
-                this.yCursorColorPicker = rect.top;
+            chooseColor(evt: MouseEvent) {
+                const rect = this.$refs.parent!.getBoundingClientRect();
+                this.xCursorColorPicker = evt.clientX - rect.left;
+                this.yCursorColorPicker = evt.clientY - rect.top;
                 this.enableCursorColorColorPicker = true;
             },
             toggleCursor() {

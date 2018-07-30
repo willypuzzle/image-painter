@@ -117,8 +117,8 @@
             },
             estrapolateCoords(evt: MouseEvent): { x: number, y: number} {
                 const canvas = this.$refs.canvas as HTMLCanvasElement;
-                const x = evt.pageX - canvas.offsetLeft;
-                const y = evt.pageY - canvas.offsetTop;
+                const x = evt.pageX - canvas.getBoundingClientRect().left;
+                const y = evt.pageY - canvas.getBoundingClientRect().top;
 
                 return {
                     x,
