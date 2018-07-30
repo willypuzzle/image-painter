@@ -2,9 +2,6 @@
 
 This package is a Vue component that allow to load an image and edit simple strokes on it
 
-NOTE:
-This package is not ready please, don't use.
-
 ## Project setup
 ```
 npm install
