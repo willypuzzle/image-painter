@@ -1,7 +1,7 @@
 <template>
     <div style="width: 100%; height: 100%;">
         <unloaded-image v-if="!imageDataUrl"></unloaded-image>
-        <loaded-image v-else :image-data-url="imageDataUrl" @export="$emit('new-image', {image: $event})"></loaded-image>
+        <loaded-image v-else :image-data-url="imageDataUrl" @export="$emit('new-image', {image: $event})" :theme="theme"></loaded-image>
     </div>
 </template>
 
@@ -18,6 +18,10 @@ export default Vue.extend({
     props: {
         imageDataUrl: {
             type: String,
+        },
+        theme: {
+            type: String,
+            default: 'default',
         },
     },
 });

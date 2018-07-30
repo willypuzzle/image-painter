@@ -1,22 +1,33 @@
 <style scoped lang="scss">
+    a {
+        margin: 5px;
+    }
+
     .button {
-        width: 20px;
-        height: 20px;
-        display: inline-block;
-        border: 1px solid black;
-        border-radius: 50%;
-        background-color: gray;
-        cursor: pointer;
+        color: grey;
+
+        &.delete {
+            &:hover {
+                color: red;
+            }
+        }
     }
 
     .enabled {
-        background-color: gray;
+        color: black;
     }
 </style>
 
 <template>
-    <div style="display: flex; flex-direction: row; justify-content: center;height: 35px;">
-        <a class="button" href="#" :style="{['background-color'] : cursorColor}" @click.prevent="chooseColor"></a>
+    <div style="display: flex; flex-direction: row; justify-content: start;height: 50px;">
+        <a href="#">
+            <img v-if="theme === 'default'" style="height: 36px;" src="../../../src/assets/pen.png" @click.prevent="toggleCursor">
+            <i v-else-if="theme === 'smilechat'" :class="{ button: true, enabled: this.cursorEnabled, ['idsign-livechat-icon-modifica']: true }"></i>
+        </a>
+        <a href="#" @click.prevent="chooseColor">
+            <img v-if="theme === 'default'" src="../../../src/assets/colors.png">
+            <i v-else-if="theme === 'smilechat'" class="idsign-livechat-icon-colore" :style="{['color'] : cursorColor }"></i>
+        </a>
         <color-picker
                 v-if="enableCursorColorColorPicker"
                 :color.sync="cursorColor"
@@ -24,8 +35,10 @@
                 :y="yCursorColorPicker"
                 @close="enableCursorColorColorPicker = false"
         ></color-picker>
-        <a href="#"><img style="height: 36px;" src="../../../src/assets/restore.png" @click.prevent="$emit('restore')"></a>
-        <a :class="{enabled: this.cursorEnabled}" href="#"><img style="height: 36px;" src="../../../src/assets/pen.png" @click.prevent="toggleCursor"></a>
+        <a href="#">
+            <img v-if="theme === 'default'" style="height: 36px;" src="../../../src/assets/restore.png" @click.prevent="$emit('restore')">
+            <i class="button delete idsign-livechat-icon-cancella" v-else-if="theme === 'smilechat'"></i>
+        </a>
     </div>
 </template>
 
@@ -36,6 +49,12 @@
     export default Vue.extend({
         components: {
             ColorPicker,
+        },
+        props: {
+            theme: {
+                type: String,
+                required: true,
+            },
         },
         data() {
             return {

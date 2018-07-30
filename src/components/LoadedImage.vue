@@ -1,6 +1,6 @@
 <template>
     <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: start;">
-        <toolbar @cursor-options="cursorOptionsSet" @restore="restore"></toolbar>
+        <toolbar @cursor-options="cursorOptionsSet" @restore="restore" :theme="theme"></toolbar>
         <div ref="parent" style="width: 100%; height: calc(100% - 35px);display: flex;justify-content: center;align-items: start;">
             <canvas
                     ref="canvas"
@@ -31,6 +31,10 @@
         },
         props: {
             imageDataUrl: {
+                type: String,
+                required: true,
+            },
+            theme: {
                 type: String,
                 required: true,
             },

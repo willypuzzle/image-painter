@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<title>image-painter demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./image-painter.umd.js"></script>
+<link rel="stylesheet" href="./image-painter.css">
+
+<div id="app">
+  <demo></demo>
+</div>
+
+<script>
+new Vue({
+  components: {
+    demo: image-painter
+  }
+}).$mount('#app')
+</script>

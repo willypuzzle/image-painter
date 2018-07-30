@@ -1,7 +1,7 @@
 {
-  "name": "image-painter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "dom-image-painter",
+  "version": "0.1.0-alpha.2",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:test-application": "vue-cli-service build",
