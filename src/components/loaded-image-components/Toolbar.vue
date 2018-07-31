@@ -75,7 +75,7 @@
         },
         methods: {
             chooseColor(evt: MouseEvent) {
-                const rect = this.$refs.parent!.getBoundingClientRect();
+                const rect = (this.$refs.parent! as HTMLElement).getBoundingClientRect();
                 this.xCursorColorPicker = evt.clientX - rect.left;
                 this.yCursorColorPicker = evt.clientY - rect.top;
                 this.enableCursorColorColorPicker = true;

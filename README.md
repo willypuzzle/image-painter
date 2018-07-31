@@ -2,6 +2,14 @@
 
 This package is a Vue component that allow to load an image and edit simple strokes on it
 
+To import the component use:
+```
+import ImageEditor from 'dom-image-painter/dist/image-painter.common.js'
+```
+
+the component receive one props: image-data-url that is the data-url of the image (for instance what you get with getAsDataUrl() method), and emit on event: new-image that emits a object like {image: 'data-url image edited'}.
+
+
 ## Project setup
 ```
 npm install
