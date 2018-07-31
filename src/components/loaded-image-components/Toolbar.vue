@@ -1,27 +1,29 @@
-<style scoped lang="scss">
-    .body-button {
-        display: inline-block;
-        margin: 5px;
-        width: 36px;
-        height: 36px;
-
-        .button {
-            color: grey;
-
-            &.delete {
-                &:hover {
-                    color: red;
-                }
-            }
-        }
-
-        .enabled {
-            color: black;
-        }
-
-        .icon {
+<style lang="scss">
+    .dom-image-editor-toolbar {
+        .body-button {
+            display: inline-block;
+            margin: 5px;
             width: 36px;
             height: 36px;
+
+            .button {
+                color: grey;
+
+                &.delete {
+                    &:hover {
+                        color: red;
+                    }
+                }
+            }
+
+            .enabled {
+                color: black;
+            }
+
+            .icon {
+                width: 36px;
+                height: 36px;
+            }
         }
     }
 </style>
