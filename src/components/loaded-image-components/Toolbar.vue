@@ -29,7 +29,7 @@
 </style>
 
 <template>
-    <div ref="parent" style="display: flex; flex-direction: row; justify-content: start;height: 50px;">
+    <div class="dom-image-editor-toolbar" ref="parent" style="display: flex; flex-direction: row; justify-content: start;height: 50px;">
         <a class="body-button" href="#" @click.prevent="toggleCursor">
             <img v-if="theme === 'default'" style="height: 36px;" src="../../../src/assets/pen.png">
             <i v-else-if="theme === 'smilechat'" :class="{ button: true, enabled: this.cursorEnabled, ['idsign-livechat-icon-modifica']: true, icon: true }"></i>
