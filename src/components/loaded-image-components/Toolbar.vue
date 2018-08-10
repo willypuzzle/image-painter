@@ -7,7 +7,7 @@
             height: 36px;
 
             .button {
-                color: grey;
+                color: #e6e6e6;
 
                 &.delete {
                     &:hover {

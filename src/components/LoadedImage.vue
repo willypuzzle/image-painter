@@ -3,6 +3,7 @@
         <toolbar @cursor-options="cursorOptionsSet" @restore="restore" :theme="theme"></toolbar>
         <div ref="parent" style="width: 100%; height: calc(100% - 35px);display: flex;justify-content: center;align-items: start;">
             <canvas
+                    style="border:1px solid #ccc;"
                     ref="canvas"
                     v-on:mousemove="mouseMove"
                     v-on:mouseover="mouseOver"
